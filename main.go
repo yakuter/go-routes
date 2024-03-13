@@ -12,7 +12,7 @@ func main() {
 		fmt.Fprintf(w, "Welcome to the Yakuter's Go Routes!")
 	})
 
-	// Route with path parameter
+	// Route with path parameter (e.g. /users/123)
 	http.HandleFunc("/users/", func(w http.ResponseWriter, r *http.Request) {
 		userID := r.URL.Path[len("/users/"):]
 		fmt.Fprintf(w, "User ID: %s", userID)
@@ -21,6 +21,11 @@ func main() {
 	// Route handling different methods
 	http.HandleFunc("/method", func(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, r.Method)
+	})
+
+	// Route handling different specific methods
+	http.HandleFunc("GET /get-method", func(w http.ResponseWriter, r *http.Request) {
+		fmt.Fprintf(w, "Request Method is: %s", r.Method)
 	})
 
 	// Route with query parameters
